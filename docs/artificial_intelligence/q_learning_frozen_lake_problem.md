@@ -2,7 +2,7 @@
 layout: default
 title: Q-Learning: Frozen Lake Problem
 parent: Artificial Intelligence
-permalink: /docs/artificial_intelligence/q_learning_frozen_lake_problem
+nav_order: 1
 ---
 
 Q-Learning: Frozen Lake Problem
