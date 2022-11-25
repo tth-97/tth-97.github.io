@@ -5,6 +5,8 @@ parent: Artificial Intelligence
 nav_order: 1
 ---
 
+# Q-Learning: Frozen Lake Problem
+
 Q-Learning: Frozen Lake Problem
 {: .fs-7 .fw-700 }
 
