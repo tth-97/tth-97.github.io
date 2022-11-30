@@ -1,34 +1,39 @@
 ---
 layout: default
-title: Q-Learning; Frozen Lake Problem
+title: Q-Learning with Frozen Lake Problem
 parent: Artificial Intelligence
 nav_order: 1
 ---
 
-Q-Learning: Frozen Lake Problem
+Q-Learning with Frozen Lake Problem
 {: .fs-7 .fw-700 }
 
 강화학습(Reinforcement Learning)이란 반복적인 시도로 시행착오를 겪으며, 주어진 외부 환경으로 부터 Reward를 받고 이를 통해 Goal에 도달하는 기계 학습을 말한다. **Q-Learning**은 강화학습 가운데 가장 널리 사용되는 기계 학습 알고리즘으로 그 식은 다음과 같다.   
-<math> \Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))  </math>
-* <math> \Q(s,a) </math>는 estimated utility function으로, State <math> s </math>에서 Action <math> a </math>를 선택하는 것이 얼마나 유리한지 그 정도를 나타낸다.
-* <math> \Q(s,a) </math>는 Action <math> a </math>를 선택하여 얻을 수 있는 **즉각적인 reward**와 Action <math> a </math>로 인해 변화된 State s'에서 얻을 수 있는 **잠재적 reward의 최대값**의 합으로 정의한다.
-* <math> \Q(s,a) </math>의 학습이 완료되면 각 Step마다 현재 State <math> s </math>에 대하여 평가함수 <math> \Q(s,a) </math>를 최대화하는 Action <math> a </math>를 선택한다.
+$$\Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))$$
+* $\Q(s,a)$는 estimated utility function으로, State $s$에서 Action $a$를 선택하는 것이 얼마나 유리한지 그 정도를 나타낸다.
+* $\Q(s,a)$는 Action $a$를 선택하여 얻을 수 있는 **즉각적인 reward**와 Action $a$로 인해 변화된 State $s'$에서 얻을 수 있는 **잠재적 reward의 최대값**의 합으로 정의한다.
+* $\Q(s,a)$의 학습이 완료되면 각 Step마다 현재 State $s$에 대하여 평가함수  $\Q(s,a)$를 최대화하는 Action $a$를 선택한다.
 
 
-
-
-
+Frozen Lake Problem이란 Safe(S)에서 출발하여 Hole(H)을 피해 Frozen(F)인 부분만 밟으며 Goal(G)에 도착하는 문제이다. H에 빠지면 reward=-1을 얻고 게임이 끝난다. 목표지점인 G에 도착하면 reward=1을 얻고 게임이 끝난다. 학습 후 S에서 G로 가는 Rout(R)을 구할 수 있다. discount factor $\gamma$는 0.5로 설정하였다.   
+   
 입력: FrozenLake_1.txt
-1 4 4
-SFFFㅇㅇㅇㄹ
-FHFH
-FFFH
-HFFG
- 
+1 4 4 //file number, row, column   
+SFFF   
+FHFH   
+FFFH   
+HFFG   
+   
+출력: FrozenLake_1_output.txt   
+1 4 4   
+SRRF   
+FHRH   
+FFRH   
+HFRG   
 
 ----
    
-게임 루프
+코드 설명
 {: .fs-6 .fw-500 }
 
 게임은 프로그램이 실행되는 동안 매초마다 여러 번 갱신되어야한다. 이를 위한  루프(loop)가 존재하는데 이를 **게임 루프(game loop)**라 한다. 게임 루프는 게임 클래스의 속에 있으며 게임 프로그램의 전반적인 흐름을 제어한다. 플레이어가 게임 프로그램을 종료하지 않는 한 루프는 계속해서 반복된다. 게임이 초당 60프레임으로 실행된다는 것은 게임 루프가 초당 60번의 반복을 완료한다는 걸 뜻한다.   
