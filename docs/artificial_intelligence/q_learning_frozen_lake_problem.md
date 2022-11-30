@@ -1,8 +1,8 @@
----
 layout: default
 title: Q-Learning: Frozen Lake Problem
 parent: Artificial Intelligence
 nav_order: 1
+
 ---
 
 Q-Learning: Frozen Lake Problem
