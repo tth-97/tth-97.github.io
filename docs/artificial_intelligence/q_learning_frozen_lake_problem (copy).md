@@ -17,7 +17,7 @@ $$Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))$$
 **수렴할 때까지 n번 반복**
 1. 한 스텝의 경험을 쌓고
 2. 경험한 데이터로 $q(s,a)$ 테이블의 값을 업데이트하고 (정책 평가)
-3. 업데이트된 $q(s,a)$ 테이블을 이용하여 &\epsilon -greedy$ 정책을 만들고 (정책 개선)
+3. 업데이트된 $q(s,a)$ 테이블을 이용하여 epsilon -greedy 정책을 만들고 (정책 개선)
 
 구현한 코드는 **환경**과 **에이전트**에 해당하는 2개의 class와 **경험을 쌓고 학습을 하는** 1개의 main함수, input file을 처리하는 부분으로 이루어져있다. output file은 main함수에서 다루었다.
 
@@ -53,11 +53,7 @@ class LakeWorld():
         if a==0: #받은 액션 a가 0이면 self.move_up()함수 호출
             self.move_up()
         elif a==1:
-            self.move_right()
-        elif a==2:
-            self.move_down()
-        elif a==3:
-            self.move_left()
+            ... #생략
 
         reward = self.get_reward() #보상을 정해준다.
         terminated = self.is_terminated() #에피소드가 끝났는지 확인한다.
@@ -112,8 +108,7 @@ class QAgent():
         if coin < self.eps: #coin 0.9보다 작으면 0,1,2,3 중 랜덤하게 하나 선택
             action = random.randint(0,3)
         else: #그렇지 않으면 현재 q_table의 값을 읽어 가장 최적의 action선택
-            action = 0
-            action_val = self.q_table[0][x][y]
+            ...
             for i in range(a_num):
                 tmp = self.q_table[i][x][y]
                 if tmp>action_val:
@@ -150,8 +145,8 @@ def main(file_number):
         terminated = False
         s = env.reset()
         while not terminated:
-            a = agent.select_action(s)
-            s_prime, r, terminated = env.step(a)
+            a = agent.select_action(s) #action을 선택
+            s_prime, r, terminated = env.step(a) #step을 진행
             agent.update_table((s,a,r,s_prime)) #한 스텝이 끝날때마다 update_table 함수 호출
             s = s_prime
     best_action_list = agent.get_best_action_list() #현재의 Q테이블 중에 가장 best인 action을 선택
