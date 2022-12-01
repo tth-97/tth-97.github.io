@@ -12,31 +12,19 @@ Q-Learning with Frozen Lake Problem
 $$Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))$$
 * $Q(s,a)$는 estimated utility function으로, State $s$에서 Action $a$를 선택하는 것이 얼마나 유리한지 그 정도를 나타낸다.
 * $Q(s,a)$는 Action $a$를 선택하여 얻을 수 있는 **즉각적인 reward**와 Action $a$로 인해 변화된 State $s'$에서 얻을 수 있는 **잠재적 reward의 최대값**의 합으로 정의한다.
-* $Q(s,a)$의 학습이 완료되면 각 Step마다 현재 State $s$에 대하여 평가함수  $ \Q(s,a)$를 최대화하는 Action $a$를 선택한다.
-
-
-Frozen Lake Problem이란 Safe(S)에서 출발하여 Hole(H)을 피해 Frozen(F)인 부분만 밟으며 Goal(G)에 도착하는 문제이다. H에 빠지면 reward=-1을 얻고 게임이 끝난다. 목표지점인 G에 도착하면 reward=1을 얻고 게임이 끝난다. 학습 후 S에서 G로 가는 Rout(R)을 구할 수 있다. discount factor $\gamma$는 0.5로 설정하였다.   
-   
-입력: FrozenLake_1.txt   
-1 4 4 //file number, row, column   
-SFFF   
-FHFH   
-FFFH   
-HFFG   
-   
-출력: FrozenLake_1_output.txt   
-1 4 4   
-SRRF   
-FHRH   
-FFRH   
-HFRG   
+* $Q(s,a)$의 학습이 완료되면 각 Step마다 현재 State $s$에 대하여 평가함수  $Q(s,a)$를 최대화하는 Action $a$를 선택한다.
 
 ----
    
-함수 설명 
-{: .fs-6 .fw-500 }
+#함수 설명 
 
-전체적인 흐름은 Temporal Difference방법론을 따른다. 구체적으로는 다음과 같다.
+강화학습(Reinforcement Learning)이란 반복적인 시도로 시행착오를 겪으며, 주어진 외부 환경으로 부터 Reward를 받고 이를 통해 Goal에 도달하는 기계 학습을 말한다. **Q-Learning**은 강화학습 가운데 가장 널리 사용되는 기계 학습 알고리즘으로 그 식은 다음과 같다.   
+$$Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))$$
+* $Q(s,a)$는 estimated utility function으로, State $s$에서 Action $a$를 선택하는 것이 얼마나 유리한지 그 정도를 나타낸다.
+* $Q(s,a)$는 Action $a$를 선택하여 얻을 수 있는 **즉각적인 reward**와 Action $a$로 인해 변화된 State $s'$에서 얻을 수 있는 **잠재적 reward의 최대값**의 합으로 정의한다.
+* $Q(s,a)$의 학습이 완료되면 각 Step마다 현재 State $s$에 대하여 평가함수  $Q(s,a)$를 최대화하는 Action $a$를 선택한다.
+
+코드의 전체적인 흐름은 Temporal Difference방법론을 따른다. 구체적으로는 다음과 같다.
 
 **수렴할 때까지 n번 반복**
 1. 한 스텝의 경험을 쌓고
@@ -62,8 +50,7 @@ if __name__=="__main__":
     #input함수 처리
 ```
 
-코드 설명
-{: .fs-6 .fw-500 }
+#코드 설명
 
 다음은 위 class와 함수의 세부 코드이다. 그 역할을 주석으로 설명하였다.
 
@@ -75,7 +62,7 @@ class LakeWorld():
         self.y = start_y
 
     def step(self, a): #액션을 받아 현재 위치를 바꾸고, 그에 따른 보상을 정해줌. 내부에서 아래 4개의 move함수를 호출한다.
-        if a==0:
+        if a==0: #받은 액션 a가 0이면 self.move_up()함수 호출
             self.move_up()
         elif a==1:
             self.move_right()
@@ -89,10 +76,10 @@ class LakeWorld():
         return (self.x, self.y), reward, terminated #다음 상태와 보상, 에피소드가 끝났는지 여부를 리턴
 
     def move_up(self): #현재 위치에서 한 칸 위로 
-        if self.x==0: #호수 바깥으로 진행하는 액션은
-            pass      #무효처리
+        if self.x==0: #호수 바깥으로 진행하는 액션은 무효처리
+            pass     
         else:
-            self.x -= 1
+            self.x -= 1 #호수 바깥으로 나가지 않으면 self.x의 위치를 한 칸 위로
 
     def move_right(self): #현재 위치에서 한 칸 오른쪽으로
     	... #생략
@@ -133,10 +120,10 @@ class QAgent():
 
     def select_action(self, s): #eps-greedy로 액션을 선택
         x, y = s
-        coin = random.random()
-        if coin < self.eps:
+        coin = random.random() #0에서 1사이의 random한 수
+        if coin < self.eps: #coin 0.9보다 작으면 0,1,2,3 중 랜덤하게 하나 선택
             action = random.randint(0,3)
-        else:
+        else: #그렇지 않으면 현재 q_table의 값을 읽어 가장 최적의 action선택
             action = 0
             action_val = self.q_table[0][x][y]
             for i in range(a_num):
@@ -144,7 +131,7 @@ class QAgent():
                 if tmp>action_val:
                     action_val = tmp
                     action = i
-        return action
+        return action #action 리턴
 
     def update_table(self, transition): #Q테이블 업데이트
 	#transition은 상태 전이 1번을 뜻함
@@ -180,50 +167,61 @@ def main(file_number):
             agent.update_table((s,a,r,s_prime)) #한 스텝이 끝날때마다 update_table 함수 호출
             s = s_prime
     best_action_list = agent.get_best_action_list() #현재의 Q테이블 중에 가장 best인 action을 선택
+    
+    #output파일처리
+    if file_number==1: #현재 open되어 있는 파일의 번호가 1이면
+        f = open('FrozenLake_1_output.txt', 'w') #'FrozenLake_1_output.txt'을 쓰기모드로 생성
+   ...(생략) #파일 2, 3에도 동일하게 적용
+    f.write(str(file_number)+" "+str(row)+ " "+str(col)+"\n") #파일의 첫번째 라인(file number, row, column)쓰기
+    
+    (x_, y_) = env.reset() #현재 위치를 S로 초기화
+    path=[] #path를 저장할 리스트 생성
+    while(best_action_list[x_][y_]!='x'): #현재 위치가 G에 도달할 때까지
+        best_action=best_action_list[x_][y_] #현재 위치에서 best_action을 선택하여 준다.
+        if best_action==0: #만약 현재 위치에서 best_action이 0이면
+            x_ -= 1 #현재 위치를 한 칸 위로
+        ... #생략 #best_action에 따라 현재 위치를 업데이트 해 준다
+        path.append((x_,y_)) #path기록
+    
+    for i in range(row):
+        for j in range(col):
+	 	... #생략
+                if in_path: #lake의 'F'의 좌표가 path안에 있다면 
+                    f.write('R') #'R'을 출력
+                    ... #생략 #그렇지 않다면 lake의 'F' 'H', 'G'을 그대로 출력
+    f.close()
 ```
 
-**main 
+**main 함수 실행**
+```python3
 if __name__ == "__main__":
 
-    with open("FrozenLake_1.txt", 'r') as f1:
-        lines1 = f1.read().splitlines()
+    with open("FrozenLake_1.txt", 'r') as f1: #파일 FrozenLake_1.txt을 읽기모드로 open
+        lines1 = f1.read().splitlines() #파일 FrozenLake_1.txt의 내용을 read
 
-    with open("FrozenLake_2.txt", 'r') as f2:
-        lines2 = f2.read().splitlines()
-    
-    with open("FrozenLake_3.txt", 'r') as f3:
-        lines3 = f3.read().splitlines() 
+    ...(생략) #파일 2, 3에도 동일하게 적용
 
-    files = { 1:lines1, 2:lines2, 3:lines3}
-    
-    global row, col
-    global lake
-    global start_x, start_y
-    global a_num
-
-    a_num = 4
-
-    for f in [1,2,3]:
-        info = files[f].pop(0)
-        row = int(info.split()[1])
-        col = int(info.split()[2])
-        lake = files[f]
-        for i in range(row):
-            for j in range(col):  
-                if f==1:
+    files = { 1:lines1, 2:lines2, 3:lines3} #파일 번호와 함께 각 파일의 내용을 딕셔너리 형태로 저장
+ 
+    for f in [1,2,3]: #각각의 파일에 대하여
+        info = files[f].pop(0) #파일의 첫번째 라인(file number, row, column)을 읽어드린다.
+        row = int(info.split()[1]) #row 정의
+        col = int(info.split()[2]) #column 정의
+        lake = files[f] #FrozenLake 정의
+        for i in range(row): #각 row에 대하여
+            for j in range(col): #각 column에 대하여
+                if f==1: #파일 번호가 1일때
                     if lake[i][j]=='S':
                         start_x = i
                         start_y = j
-                elif f==2:
-                    if lake[i][j]=='S':
-                        start_x = i
-                        start_y = j
-                elif f==3:
-                    if lake[i][j]=='S':
-                        start_x = i
-                        start_y = j
-        main(f)
-실험 결과 설명 
-{: .fs-6 .fw-500 }
+		... #생략 #파일 2, 3에도 동일하게 적용
+        main(f) #각각의 파일에 대해여 main함수 실행
+```
+
+#실험 결과 설명 
+
+Frozen Lake Problem이란 Safe(S)에서 출발하여 Hole(H)을 피해 Frozen(F)인 부분만 밟으며 Goal(G)에 도착하는 문제이다. H에 빠지면 reward=-1을 얻고 게임이 끝난다. 목표지점인 G에 도착하면 reward=1을 얻고 게임이 끝난다. 학습 후 S에서 G로 가는 Rout(R)을 구할 수 있다. discount factor $\gamma$는 0.5로 설정하였다.   
+
+학습 후 위 사진과 같이 S에서 출발하여 밟을 수 있는 F만 밝으며 G까지 갈 수 있는 최적의 경로 R을 출력한 것을 볼 수 있다. 이 경로는 유일하지 않으며, main함수의 output파일 처리 과정에서 best_ation을 어떻게 처리하느냐에 따라 달라질 수 있다.
 
 
