@@ -1,22 +1,10 @@
----
-layout: default
-title: Q-Learning with Frozen Lake Problem
-parent: Artificial Intelligence
-nav_order: 1
----
-
-Q-Learning with Frozen Lake Problem
-{: .fs-7 .fw-700 }
-
-강화학습(Reinforcement Learning)이란 반복적인 시도로 시행착오를 겪으며, 주어진 외부 환경으로 부터 Reward를 받고 이를 통해 Goal에 도달하는 기계 학습을 말한다. **Q-Learning**은 강화학습 가운데 가장 널리 사용되는 기계 학습 알고리즘으로 그 식은 다음과 같다.   
-$$Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))$$
-* $Q(s,a)$는 estimated utility function으로, State $s$에서 Action $a$를 선택하는 것이 얼마나 유리한지 그 정도를 나타낸다.
-* $Q(s,a)$는 Action $a$를 선택하여 얻을 수 있는 **즉각적인 reward**와 Action $a$로 인해 변화된 State $s'$에서 얻을 수 있는 **잠재적 reward의 최대값**의 합으로 정의한다.
-* $Q(s,a)$의 학습이 완료되면 각 Step마다 현재 State $s$에 대하여 평가함수  $Q(s,a)$를 최대화하는 Action $a$를 선택한다.
+> Introduction to Artificial Intelligence
+> * 2022-2 Assignment: Frozen Lake Problem 
+> * 컴퓨터소프트웨어학과 2022139171 강민지
 
 ----
    
-#함수 설명 
+### 함수 설명 
 
 강화학습(Reinforcement Learning)이란 반복적인 시도로 시행착오를 겪으며, 주어진 외부 환경으로 부터 Reward를 받고 이를 통해 Goal에 도달하는 기계 학습을 말한다. **Q-Learning**은 강화학습 가운데 가장 널리 사용되는 기계 학습 알고리즘으로 그 식은 다음과 같다.   
 $$Q(s,a) = r(s,a) + \gamma \max_{a'} (Q(s',a'))$$
@@ -50,7 +38,7 @@ if __name__=="__main__":
     #input함수 처리
 ```
 
-#코드 설명
+### 코드 설명
 
 다음은 위 class와 함수의 세부 코드이다. 그 역할을 주석으로 설명하였다.
 
@@ -218,7 +206,7 @@ if __name__ == "__main__":
         main(f) #각각의 파일에 대해여 main함수 실행
 ```
 
-#실험 결과 설명 
+### 실험 결과 설명 
 
 Frozen Lake Problem이란 Safe(S)에서 출발하여 Hole(H)을 피해 Frozen(F)인 부분만 밟으며 Goal(G)에 도착하는 문제이다. H에 빠지면 reward=-1을 얻고 게임이 끝난다. 목표지점인 G에 도착하면 reward=1을 얻고 게임이 끝난다. 학습 후 S에서 G로 가는 Rout(R)을 구할 수 있다. discount factor $\gamma$는 0.5로 설정하였다.   
 
