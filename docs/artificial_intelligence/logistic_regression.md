@@ -23,7 +23,7 @@ Artificial neural network에서 Logistic regression을 다루는 이유는 **art
 * (Model) Parameters: $$w \in \mathbb{R}^{n_{x}}$$,\ $$b \in \mathbb{R}$$
 * (Model) Output: $$ \hat{y} = \sigma(w^{T}x + b) $$
   * Sigmoid function $$ \sigma(z) = \frac{1}{1+e^{-z}}$$, 독립 변수가 $$\left( -\infty, \infty \right)$$의 어느 숫자이든 상관 없이 종속 변수 또는 결과 값이 항상 범위 $$ \left[ 0, 1 \right] $$ 사이에 있도록 한다.   
-    ![sigmoid_function](../../../../assets/images/Artificial_Intelligence/sigmoid_function.png){: width="60%" height="60%"}
+    ![sigmoid_function](../../../../assets/images/artificial_intelligence/sigmoid_function.png){: width="60%" height="60%"}
 * **The goal of logistic regression: try to learn the parameters $$w$$ and $$b$$ so that $$\hat{y}$$ becomes a good estimate of the probability of $$y$$**
 * Notational convention
   * $$x_{0} = 1,\ x \in \mathbb{R}^{n_{x}}$$ ,
@@ -34,7 +34,7 @@ Artificial neural network에서 Logistic regression을 다루는 이유는 **art
 
 Logistic regression은 Linear combination으로 weigthed sum을 한 기존의 Linear regression 수식에 sigmoid 함수를 적용하여 출력값을 모델링한 것으로도 볼 수 있다. 이렇게 하면 Linear regression의 hyper plane으로는 fitting시키지 못하는 함수를 fitting할 수 있다.
 
-![linear_vs_logistic](../../../../assets/images/Artificial_Intelligence/linear_vs_logistic.png){: width="90%" height="90%"}
+![linear_vs_logistic](../../../../assets/images/artificial_intelligence/linear_vs_logistic.png){: width="90%" height="90%"}
 
 그렇다면, 어떻게 Logistic regression을 이용하여 위 그림과 같이 출력값을 잘 추정하는 모델을 만들 수 있을까?
  
@@ -44,7 +44,7 @@ Cost Function
 {: .fs-6 .fw-500 }
 
 * Model: $$\hat{y} = \sigma(w^{T}x + b)$$, where $$ \sigma(z^{i}) = \frac{1}{1+e^{-z^{i}}}$$ and $$z^{i} = W^{T}x^{i} + b$$
-* Given training set $$ \{ (x^{1},y^{1}),\ ...,\ (x^{m},y^{m}) \}, we want $$ \hat{y}^{i} \approx y^{i}$$
+* Given training set $$ \{ (x^{1},y^{1}),\ ...,\ (x^{m},y^{m}) \} $$, we want $$ \hat{y}^{i} \approx y^{i}$$
 
 {: .important-title}
 > Note
