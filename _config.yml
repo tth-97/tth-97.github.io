@@ -1,8 +1,7 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: 강부벌레
+description: 나의 눈물만이 나를 이긴다.
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: https://tth-97.github.io/tth-97.github.io
 
-aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+math: mathjax
