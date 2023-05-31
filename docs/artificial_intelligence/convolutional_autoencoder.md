@@ -6,8 +6,15 @@ grand_parent: Artificial Intelligence
 permalink: /docs/artifirial_intelligence/deep_learning/convolutional_autoencoder/
 ---
 
-Convolutional Autoencoder
+AutoEncoder with CNN
 {: .fs-7 .fw-700 }
+
+딥러닝및응용   
+최용석교수님, 김수형조교님   
+   
+컴퓨터소프트웨어학과 2022139171 강민지
+
+---
 
 Convolutional Autoencoder란 Convolutional neural network(CNN)을 주요 네트워크로 사용한 Autoencoder이다. 이미지를 처리하는 Autoencoder를 만들 때 주로 사용하며, 이미지의 가장 중요한 feature를 찾고 그 feature를 활용할 수 있다. 전체적인 구조는 다음과 같다. Input image에서 Latent Space Representation을 거쳐 Reconstructed image로 가는 사이사이에 CNN이 사용되고 있다.
 
