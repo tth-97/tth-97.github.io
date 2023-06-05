@@ -1,9 +1,9 @@
 ---
 layout: default
-title: tmux with singularity
+title: tmux
 parent: Etc
 grand_parent: Tips
-permalink: /docs/tips/etc/tmux with singularity/
+permalink: /docs/tips/etc/tmux/
 ---
 
 tmux
