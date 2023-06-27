@@ -1,6 +1,10 @@
 ---
 layout: default
+<<<<<<< HEAD:docs/tips/logistic_regression.md
 title: tmux 
+=======
+title: tmux
+>>>>>>> fac86c213f63861bff472cac0c7f6d37431dc71b:docs/tips/tmux.md
 parent: Etc
 grand_parent: Tips
 permalink: /docs/tips/etc/tmux/
