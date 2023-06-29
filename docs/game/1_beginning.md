@@ -4,6 +4,7 @@ title: 1.1 Beginning
 parent: Game Programming in C++
 grand_parent: Game
 permalink: /docs/game/game_programming_in_cpp/1_beginning
+published: false
 ---
 
 Beginning
