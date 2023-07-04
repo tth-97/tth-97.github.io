@@ -41,7 +41,6 @@ The < launch > tag is the root element of any roslauch file. Its sole purpuse is
 * **arg**: Declare an argument. launch 파일 내에 변수를 정의할 수 있어서 실행할 때 파라미터를 변경시킬 수 있다.
 * **group**: Group enclosed elements sharing a namespace or remap. 실행되는 노드를 그룹화할 때 사용한다. 
    
-이 중에서 가장 자주 사용되는 element 태그들을(연구에 필요한 태그들만ㅎㅎ) 예시와 함께 살펴보자.   
        
 --- 
     
