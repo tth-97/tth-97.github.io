@@ -1,17 +1,14 @@
 ---
 layout: default
-title: Logistic Regression
-parent: Deep Learning
-grand_parent: Artificial Intelligence
-permalink: /docs/artifirial_intelligence/deep_learning/logistic_regression/
+title: Quaternion
+parent: Computer Graphics
+nav_order: 1
 ---
 
-Logistic Regression
+Quaternion
 {: .fs-7 .fw-700 }
 
-[Logistic regression](https://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80)은 영국의 통계학자인 D. R. Cox가 1958년에 제안한 확률 모델로서 독립 변수의 선형 결합을 이용하여 사건의 발생 가능성을 예측하는 데 사용되는 통계 기법이다. Logistic Legression을 통해, *출력값을 binary classification(T / F, 1 / 0)의 형태로 추정하는 모델*을 만들 수 있다. 
-
-Artificial neural network에서 Logistic regression을 다루는 이유는 **artificial neural network의 computation unit인 neuron 하나하나가 Logistic regression을 표현하는 모델**이기 때문이다.
+**Quaternion(사원수)**은 물체의 Oriemtation(방향)을 나타내는 표현법이다. 
 
 ---
 

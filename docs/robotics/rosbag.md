@@ -27,7 +27,7 @@ rosbag은 bag을 생성, 재생, 압축 등을 하는 프로그램으로 다음�
 ---
 
 rosbag record
-{: .fs-6 .fw-500 }
+{: .fs-6 .fw-700 }
    
 rosbag record는 topic을 subscribe하고, 해당 topic에 publish된 모든 메시지를 .bag 파일에 작성한다. 즉 지정한 topic의 메시지를 .bag 파일에 기록하는 것이다. 아래와 같이 사용 중인 topic중에서 기록할 topic을 옵션으로 입력하여 bag 기록을 시작할 수 있다. 
    
@@ -37,10 +37,9 @@ $ rostopic list
 /my_robot/cmd_vel
 /my_robot/pose
 ``` 
-   
-# rosbag record [topic name]
 
 ```yaml
+# rosbag record [topic name]
 $ rosbag record /my_robot/cmd_vel /my_robot/pose
 ```
 
@@ -54,7 +53,7 @@ $ rosbag record -a
     
 {: .important-title}
 > Note
->  
+> 
 > bag to csv
 > : ropstopic ehco -b [bag file name] -p [topic name] > [csv file name]
 > 
