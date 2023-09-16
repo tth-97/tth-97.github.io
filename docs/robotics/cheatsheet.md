@@ -16,11 +16,11 @@ Ros melodic 명령어 Cheatsheet
 
 Filesystem Management Tools
 {: .fs-6 .fw-700 }
-   
-rospack
+
+* rospack
 {: .fs-5 .fw-700 .text-blue-100 }
 
-ROS 패키지와 관련된 정보를 표시하는 명령어로 find, list, depends-on, depends, profile 등의 옵션을 사용할 수 있다.  
+rospack은 ROS 패키지와 관련된 정보를 표시하는 명령어로 find, list, depends-on, depends, profile 등의 옵션을 사용할 수 있다.  
 
 다음 예제와 같이 **rospack find** 명렁어 다음에 패키지 이름을 지정하면 해당 패키지의 저장 위치가 표시된다. 
 
@@ -50,11 +50,11 @@ rviz /opt/ros/melodic/share/rviz
 rviz_plugin_tutorials /opt/ros/melodic/share/rviz_plugin_tutorials
 rviz_python_tutorial /opt/ros/melodic/share/rviz_python_tutorial
 ```
-
-roscd
+<br>
+* roscd
 {: .fs-5 .fw-700 .text-blue-100 }
 
-**roscd**는 지정한 ROS 패키지가 저장된 디렉터리로 바로 이동하는 명령어이다. roscd 명령어 이후 파라미터에 패키지 이름을 적으면 된다.
+roscd는 지정한 ROS 패키지가 저장된 디렉터리로 바로 이동하는 명령어이다. **roscd** 명령어 이후 파라미터에 패키지 이름을 적으면 된다.
    
 ```yaml
 # roscd [package name]
@@ -65,11 +65,12 @@ $ roscd my_package
 $ pwd
 /home/kang/catkin_ws/src/my_package
 ```
-
-
-# rosbag record [topic name]
+<br>
+* rosbag
+{: .fs-5 .fw-700 .text-blue-100 }
 
 ```yaml
+# rosbag record [topic name]
 $ rosbag record /my_robot/cmd_vel /my_robot/pose
 ```
 
@@ -78,17 +79,6 @@ $ rosbag record /my_robot/cmd_vel /my_robot/pose
 ```yaml
 $ rosbag record -a
 ```
-
---- 
-    
-{: .important-title}
-> Note
->  
-> bag to csv
-> : ropstopic ehco -b [bag file name] -p [topic name] > [csv file name]
-> 
-> $ rostopic echo -b my_bag.bag -p /my_robot/cmd_vel > my_csv.csv
-
 ---
 
 참고  

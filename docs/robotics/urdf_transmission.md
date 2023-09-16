@@ -1,16 +1,17 @@
 ---
 layout: default
-title: rosbag
+title: Transmission
 parent: Ros
 grand_parent: Robotics
-permalink: /docs/robotics/ros/rosbag/
+permalink: /docs/robotics/ros/urdf_transmission/
 ---
 
-rosbag
+Transmission
 {: .fs-7 .fw-700 }
 
-bag은 ROS 메시지 데이터를 저장하기 위한 ROS의 파일 형식이다. .bag확장자를 가지며 다양한 tool을 사용하여 저장, 처리, 분석 및 시각화 될 수 있다. bag의 유용한 기능중 하나는 각종 메시지를 저장하고 필요할 때 이를 재생하여 이전 상황을 그대로 재현할 수 있는 것이다. 
+그리퍼 URDF를 작성하고 있었는데 난관... 까진 아니고 난간에 봉착... 기어를 어떻게 표현하지...   
 
+URDF
 rosbag은 bag을 생성, 재생, 압축 등을 하는 프로그램으로 다음과 같은 다양한 기능들을 가지고 있다:
 
 * **record**: Record a bag file with the contents of specified topics.

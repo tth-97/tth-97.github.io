@@ -41,7 +41,6 @@ $$ M =  \begin{bmatrix}
 	2xz-2wy & 2yz+2wx & 1-2x^{2}-2y^{2} 
 	\end{bmatrix} $$     
        
-이때, 회전된 결과값을 왜 바로 쓸 수 있을까?   
     
 {: .highlight-title }
 > Note   

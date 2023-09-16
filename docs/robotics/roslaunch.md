@@ -19,15 +19,14 @@ $ roslaunch my_package my_file.launch
 
 ---
 
-
 LAUNCH FILES
-{: .fs-6 .fw-500 }
+{: .fs-6 .fw-700 }
    
 launch file은 roslaunch가 실행 노드를 설정할 때 사용하는 file이다. XML 기반이며 태그별 옵션을 제공한다. 태그는 순차적으로 평가된다.
    
    
 < launch > tag
-{: .label .label-yellow }
+{: .fs-5 .fw-700 .text-blue-100 }
 
 The < launch > tag is the root element of any roslauch file. Its sole purpuse is to act as a containere for the other elements:   
 * **node**: Launch a node. 노드 실행에 대한 태그. 패키지, 노드명, 실행명을 변경할 수 있다.
