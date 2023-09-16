@@ -28,40 +28,20 @@ Transmission은 URDF의 확장 기능으로, actuator와 joint 간의 관계를 
 </transmission>
 ```
 
-각각의 element들을 한 번 살펴보자.      
+각각의 element들을 살펴보자.      
    
  
 ---
 
-<transmiision> Attributes
-{: .fs-6 .fw-700 }
-   
+< type > tag
+{: .label .label-yellow }
 
-```yaml
-$ rostopic list
-/rosout
-/my_robot/cmd_vel
-/my_robot/pose
-``` 
+한 번만 작성하며, transmission type를 지정한다. 현재는 "transmission_interface/SimpleTransmission"만 지원하고 있다.   
 
-```yaml
-# rosbag record [topic name]
-$ rosbag record /my_robot/cmd_vel /my_robot/pose
-```
+아...
+Isaac Gym에서 transmission 지원안하네... 당장은 알아야할 필요가 없어졌다. 여유가 될 때 이어서 작성해야겠다.....
+(https://forums.developer.nvidia.com/t/are-urdf-transmission-elements-supported/177114)
 
-특정 토픽이 아닌 모든 토픽을 동시에 기록하고 싶다면 '-a' 옵션을 붙인다.
-
-```yaml
-$ rosbag record -a
-```
-<br>
-      
-{: .important-title}
-> Note
->   
-> .bag to .csv: rostopic ehco -b [bag file name] -p [topic name] > [csv file name]
->
-> $ rostopic echo -b my_bag.bag -p /my_robot/cmd_vel > my_csv.csv
 
 ---
 

@@ -22,11 +22,37 @@ $ roslaunch my_package my_file.launch
 LAUNCH FILES
 {: .fs-6 .fw-700 }
    
-launch file은 roslaunch가 실행 노드를 설정할 때 사용하는 file이다. XML 기반이며 태그별 옵션을 제공한다. 태그는 순차적으로 평가된다.
-   
-   
+launch file은 roslaunch가 실행 노드를 설정할 때 사용하는 file이다. 다음은 launch file의 예시부터 살펴보자.   
+
+```yaml
+<launch>
+    <arg name="wname" default="earth"/>
+    <arg name="rname" default="laikago"/>
+    <arg name="robot_path" value="(find $(arg rname)_description)"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find unitree_gazebo)/worlds/$(arg wname).world"/>
+        <arg name="gui" value="$(arg gui)"/>
+    </include>
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+           command="cat '$(find laikago_description)/urdf/laikago.urdf'"/>
+
+    <!-- load the parameter unitree_controller -->
+    <include file="$(find unitree_controller)/launch/set_ctrl.launch">
+        <arg name="rname" value="$(arg rname)"/>
+    </include>
+
+</launch>
+```   
+
+위 예시에서 알 수 있듯이 launch file은 XML 기반이며 태그(< >)로 이루어져 있다. 각 태그들은 그에 맞는 옵션을 제공하며, 위에서부터 아래로 순차적으로 평가된다. launch파일을 작성한다는 것은 태그를 어떻게 설정하냐는 것이다. 따라서 각 태그들이 어떤 의미가 있는지 또 무엇을 어떻게 설정해야하는지 살펴볼 필요가 있다.
+
+---
+
 < launch > tag
-{: .fs-5 .fw-700 .text-blue-100 }
+{: .label .label-yellow }
 
 The < launch > tag is the root element of any roslauch file. Its sole purpuse is to act as a containere for the other elements:   
 * **node**: Launch a node. 노드 실행에 대한 태그. 패키지, 노드명, 실행명을 변경할 수 있다.
@@ -39,7 +65,8 @@ The < launch > tag is the root element of any roslauch file. Its sole purpuse is
 * **test**: Launch a test node. 노드를 테스트할 때 사용한다. < node >와 비슷하지만 테스트에 사용할 수 있는 옵션들이 추가되어 있다.
 * **arg**: Declare an argument. launch 파일 내에 변수를 정의할 수 있어서 실행할 때 파라미터를 변경시킬 수 있다.
 * **group**: Group enclosed elements sharing a namespace or remap. 실행되는 노드를 그룹화할 때 사용한다. 
-   
+  
+다음으로 각각의 element tag들을 자세히 살펴보자. 
        
 --- 
     
