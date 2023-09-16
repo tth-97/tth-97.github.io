@@ -1,28 +1,18 @@
 ---
 layout: default
-title: Transmission
+title: URDF Transmission
 parent: Ros
 grand_parent: Robotics
 permalink: /docs/robotics/ros/urdf_transmission/
 ---
 
-Transmission
+URDF Transmission
 {: .fs-7 .fw-700 }
 
-그리퍼 URDF를 작성하고 있었는데 난관... 까진 아니고 난간에 봉착... 기어를 어떻게 표현하지...   
+그리퍼 URDF를 작성하고 있었는데 난관... 까진 아니고 난간에 봉착... 기어를 어떻게 표현해야하지...   
 
-URDF
-rosbag은 bag을 생성, 재생, 압축 등을 하는 프로그램으로 다음과 같은 다양한 기능들을 가지고 있다:
+Transmission은 URDF의 확장 기능으로, actuator와 joint 간의 관계를 설명하는 데 사용된다. 이를 통해 gear ratio 및 parallel linkages와 같은 개념을 모델링 할 수 있다. Transmissin은 effort/flow 변수를 변환하여 이들의 곱인 power가 일정하게 유지되도록 한다. 여러 actuators가 complex한 transmission을 통해 여러 joint에 연결 될 수 있다.   
 
-* **record**: Record a bag file with the contents of specified topics.
-* **info**: Summarize the contents of a bag file.
-* **play**: Summarize the contents of a bag file.
-* **check**: Determine whether a bag is playable in the current system, or if it can be migrated.
-* **fix**: Repair the messages in a bag file so that it can be played in the current system.
-* **filter**: Convert a bag file using Python expressions.
-* **compress**: Compress one or more bag files.
-* **decompress**: Decompress one or more bag files.
-* **reindex**: Reindex one or more broken bag files.
 
  
 ---
