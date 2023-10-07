@@ -42,54 +42,10 @@ $$ T =  \begin{bmatrix}
 , 
    R =  \begin{bmatrix}
 	r_{11} & r_{12} & r_{13} & 0 \\
+	1 & 0 & 0 & t_{x}
 	0 & 1 & 0 & t_{y} \\
 	0 & 0 & 1 & t_{z} \\
 	0 & 0 & 0 & 1 
 	\end{bmatrix} $$ 
     
        
-    
-{: .highlight-title }
-> Note   
->   
-> **Meaning of Rotation Matrix**   
->   
-> A rotation matrix defines
-> - **Rotation** from a global frame to be that rotated frame or,   
-> - **Orientation** of new rotated frame     
-
-
-----
-
-Python code
-{: .fs-6 .fw-700 }
-   
-Deep Learning에 사용될 Rotation matrix는 6D Rotational Representation을 사용하면 되므로, 앞의 두 columns값만 구하면 된다.   
-   
-```python
-import torch
-
-def quaternion_to_matrix(q: torch.Tensor) -> torch.Tensor:
-    """
-    Args:
-	quaternion: quaternions with vector part first, 
-		as tensor of shape (..., 4).
-    Returns:
-	Rotation matrices as tensor of shape (..., 3, 2).
-    """
-
-    x, y, z, w = torch.unbine(q, -1)
-    two = 2.0 / (q*q).sum(-1)
-    matrix = torch.stack(
-            (
-                1-two*(y*y-z*z),
-                two*(x*y-w*z),
-                two*(x*y+*w*z),
-                1-two(*x*x-z*z),
-                two*(x*z-w*y),
-                two*(y*z+w*x),
-            ),
-            -1,
-        )
-    return matrix.reshape(q.shape[:-1] + (3, 2))
-```
