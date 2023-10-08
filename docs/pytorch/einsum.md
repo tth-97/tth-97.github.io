@@ -45,23 +45,41 @@ Examples
 * Inner product
 {: .fs-5 .fw-700 .text-blue-100 }
 
-**Einstein:** $$ \ u \cdot v = u_{i}v^{i} $$   
-**Equation:** $$ \ i, i$$ ->
+Using an orthogonal basis, the inner product is the sum of corresponding components multiplied together:
 
-> $$i$$ 인덱스가 반복되므로, $$i$$차원에 대해 합산을 수행한다.   
-> -> 이후에 인덱스가 없기 때문에 결과는 스칼라이다.   
+> **Einstein:** $$ \ u \cdot v = u_{i}v^{i} $$   
+> **Equation:** $$ \ i, i$$ ->
+
+$$i$$ 인덱스가 반복되므로, $$i$$차원에 대해 합산을 수행한다.   
+-> 이후에 인덱스가 없기 때문에 결과는 스칼라이다.   
 
 ```yaml
+# 1 차원
 a = torch.tensor([1, 2, 3])
 b = torch.tensor([4, 5, 6])
-result = torch.einsum('i,i->', a, b)  # 1*4 + 2*5 + 3*6 = 32
+inner_product_1d = torch.einsum('i,i->', a, b) # tensor(32)
+
+# 2 차원
+a = torch.tensor([[1, 2], [3, 4]])
+b = torch.tensor([[5, 6], [7, 8]])
+inner_product_2d = torch.einsum('ij,ij -> i', a, b) # tensor([17, 53])
 ```
 <br/>
 * Matrix multiplication
 {: .fs-5 .fw-700 .text-blue-100 }
 
+The matrix product of two matirces $$A_{ij}$$ and $$B_{jk}$$ is:  
+$$ C_{ik} = (AB)_{ik} = = \sum_{j=1}^N A_{ij}B_{jk}$$  
+equivalent to   
+ 
+> **Einstein:** $$\ C^{i}_{k} = A^{i}_{j}B^{j}_{k}$$
+> **Equation:** $$\ ij, jk$$ -> $$ik$$
 
-
+```python
+a = torch.tensor([[1, 2], [3, 4]])
+b = torch.tensor([[5, 6], [7, 8]])
+matrix_mult = torch.einsum('ij,jk->ik', a, b) # tensor([[19, 22], [43, 50]])
+```
 
 ---
 
