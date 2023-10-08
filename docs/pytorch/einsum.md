@@ -23,10 +23,10 @@ Einstein Summation Convention
 
 einsum은 아인슈타인 표기법으로 연산을 나타내므로, 아인슈타인 표기법을 알 필요가 있다.   
    
-아래와 같은 식을 생각해보자. 
- 
-$$ y = \sum_{i=1}^3 c_{i}x^{i} = c_{1}x^{1} + c_{2}x^{2} + c_{3}x^{3} $$
-  
+아래와 같은 식을 생각해보자.  
+
+$$ y = \sum_{i=1}^3 c_{i}x^{i} = c_{1}x^{1} + c_{2}x^{2} + c_{3}x^{3} $$  
+
 아인슈타인 표기법을 사용하면, 위 식은 다음과 같이 표현된다.  
   
 $$ y = c_{i}x^{i} $$
@@ -47,7 +47,7 @@ Examples
 
 Using an orthogonal basis, the inner product is the sum of corresponding components multiplied together:
 
-> **Einstein:** $$ \ u \cdot v = u_{i}v^{i} $$   
+> **Einstein:** $$ \ u_{i}v^{i} = u \cdot v$$   
 > **Equation:** $$ \ i, i$$ ->
 
 $$i$$ 인덱스가 반복되므로, $$i$$차원에 대해 합산을 수행한다.   
@@ -69,17 +69,57 @@ inner_product_2d = torch.einsum('ij,ij -> i', a, b) # tensor([17, 53])
 {: .fs-5 .fw-700 .text-blue-100 }
 
 The matrix product of two matirces $$A_{ij}$$ and $$B_{jk}$$ is:  
-$$ C_{ik} = (AB)_{ik} = = \sum_{j=1}^N A_{ij}B_{jk}$$  
+  
+$$ C_{ik} = (AB)_{ik} = \sum_{j=1}^N A_{ij}B_{jk}$$     
+
 equivalent to   
  
-> **Einstein:** $$\ C^{i}_{k} = A^{i}_{j}B^{j}_{k}$$
-> **Equation:** $$\ ij, jk$$ -> $$ik$$
+> **Einstein:** $$\ A^{i}_{j}B^{j}_{k} = C^{i}_{k}$$   
+> **Equation:** $$\ ij, jk$$ -> $$ik$$  
 
 ```python
 a = torch.tensor([[1, 2], [3, 4]])
 b = torch.tensor([[5, 6], [7, 8]])
 matrix_mult = torch.einsum('ij,jk->ik', a, b) # tensor([[19, 22], [43, 50]])
 ```
+<br/>
+* Matrix-vector multiplication
+{: .fs-5 .fw-700 .text-blue-100 }
+
+The product of a matrix $$A_{ij}$$ with a column vector $$v_{j}$$ is:  
+
+$$ u_{i} = (Av)_{i} = \sum_{j=1}^N A_{ij}v_{j}$$   
+
+equivalent to
+
+> **Einstein:** $$\ A{i}_{j}v^{j} = u^{i}$$    
+> **Equation:** $$\ ij,j $$ -> $$i$$
+
+```python
+a = torch.tensor([[1, 2], [3, 4]])
+b = torch.tensor([5, 6])
+matrix_vector_mult = torch.einsum('ij,j->i', a, b)
+```
+
+<br/>
+* Diagonal
+{: .fs-5 .fw-700 .text-blue-100 }
+
+```python
+a = torch.tensor([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
+diagonal = torch.einsum('ii->i', a) # tensor([1, 6, 11, 16])
+```
+
+<br/>
+* Diagonal sum
+{: .fs-5 .fw-700 .text-blue-100 }
+
+```python
+a = torch.tensor([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
+diagonal = torch.einsum('ii', a) # tensor(34)
+``` 
+
+<br/>
 
 ---
 
