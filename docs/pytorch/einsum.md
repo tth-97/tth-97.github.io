@@ -1,8 +1,9 @@
 ---
 layout: default
 title: TORCH.EINSUM
-last_modified_date: 2014-04-27 12:54:47
+last_modified_date: 2023-10-09 17:49:24
 parent: PyTorch
+nav_order: 1
 permalink: /docs/pytorch/einsum
 ---
 
