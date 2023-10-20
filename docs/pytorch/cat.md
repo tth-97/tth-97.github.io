@@ -39,13 +39,13 @@ Examples
 dim=0 은 첫 번째 차원을 기준으로 텐서들을 합치는 것을 의미한다. 두 개의 2x3 텐서를 첫 번째 차원을 기준으로 합치면 (2+2)x3 = 4x3 텐서가 된다.
 
 ```python
-x = torch.tensor([[ 1,  2,  3], 
-                  [ 4,  5,  6]])
-y = torch.tensor([[ 7,  8,  9],
+x = torch.tensor([[1,  2,  3], 
+                  [4,  5,  6]])
+y = torch.tensor([[7,  8,  9],
                   [10, 11, 12]])
-result = torch.cat((x, y), dim=0) # tensor([[ 1,  2,  3], 
-			          #	    [ 4,  5,  6],
-				  #	    [ 7,  8,  9],
+result = torch.cat((x, y), dim=0) # tensor([[1,  2,  3], 
+			          #	    [4,  5,  6],
+				  #	    [7,  8,  9],
 				  #	    [10, 11, 12]])
 ```
 
@@ -56,16 +56,41 @@ result = torch.cat((x, y), dim=0) # tensor([[ 1,  2,  3],
 dim=1 은 두 번재 차원을 기준으로 텐서들을 합치는 것을 의미한다. 두 개의 2x3 텐서들을 두 번째 차원을 기준으로 합치면 2x(3+3) = 2x6 텐서가 된다.
 
 ```python
-x = torch.tensor([[ 1,  2,  3], 
-                  [ 4,  5,  6]])
-y = torch.tensor([[ 7,  8,  9],
+x = torch.tensor([[1,  2,  3], 
+                  [4,  5,  6]])
+y = torch.tensor([[7,  8,  9],
                   [10, 11, 12]])
-result = torch.cat((x, y), dim=1) # tensor([[ 1,  2,  3,  7,  8,  9],
-                                  #         [ 4,  5,  6, 10, 11, 12]])
+result = torch.cat((x, y), dim=1) # tensor([[1,  2,  3,  7,  8,  9],
+                                  #         [4,  5,  6, 10, 11, 12]])
 ```
 
 <br/>
+* 응용
+{: .fs-5 .fw-700 .text-yellow-200 }
 
+```python
+# depth image
+x = torch.tensor([[1,  2,  3],
+                  [4,  5,  6]])
+y = torch.tensor([[7,  8,  9],
+                  [10, 11, 12]])
+
+# flatten
+x_flattened = x.flatten(0) # tensor([1,  2,  3,  4,  5,  6])
+y_flattened = y.flatten(0) # tensor([7,  8,  9, 10, 11, 12])
+
+# concatenating
+result = torch.cat([x_flattened, y_flattend], dim=0) # tensor([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+
+# reshape
+result = result.view(2, 6) # tensor([[1,  2,  3,  4,  5,  6],
+                           #         [7,  8,  9, 10, 11, 12]])
+
+# 참고: concatenating + reshape의 결과는 torch.stack을 쓰면 된다
+result_stack = torch.stack([x, y], dim=0) # tensor([[1,  2,  3,  4,  5,  6],
+                                          #         [7,  8,  9, 10, 11, 12]])
+```
+<br/>
 ---
 
 참고  
