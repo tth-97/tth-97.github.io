@@ -15,14 +15,14 @@ torch.cat(tensors, dim=0, *, out=None) -> Tensor
 ```
 
 **Parameters**  
-> **tensors**(_sequence of Tensors_) - any python sequence of tensors of the same type. Non-empty tensors provided must have the same shape, except in the cat dimension.
+> **tensors**(_sequence of Tensors_) - any python sequence of tensors of the same type. Non-empty tensors provided must have the same shape, except in the cat dimension.    
 > **dim**(_int, optional_): the dimension over which the tensors are concatenated   
 
 **Keyword Arguments**
 > **out**(_Tensor, optional_) - the output tensor   
 
 <br/>
-**torch.cat**은 텐서들을 특정 차원을 기준으로 이어붙이는(concatenating) 작업을 수행하는 함수이다. 데이터를 처리하거나 딥러닝 모델의 구조를 설계할 때, 두 개 이상의 텐서를 하나로 합치는 경우가 자주 있다. 두 부분의 결과를 합쳐야 할 때, 또는 입력 데이터를 처리 형태에 맞게 조정할 때 등 다양한 상황에서 텐서들을 연결해야 할 필요가 생긴다. 이러한 경우에 torch.cat을 사용한다.
+**torch.cat**은 텐서들을 특정 차원을 기준으로 이어붙이는(concatenating) 작업을 수행하는 함수이다. 데이터를 처리하거나 딥러닝 모델의 구조를 설계할 때, 두 개 이상의 텐서를 하나로 합치는 경우가 자주 있다. 이러한 경우에 torch.cat을 사용한다.
 <br/>
 
 ---
@@ -80,15 +80,15 @@ x_flattened = x.flatten(0) # tensor([1,  2,  3,  4,  5,  6])
 y_flattened = y.flatten(0) # tensor([7,  8,  9, 10, 11, 12])
 
 # concatenating
-result = torch.cat([x_flattened, y_flattend], dim=0) # tensor([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+result = torch.cat([x_flattened, y_flattened], dim=0) # tensor([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 # reshape
 result = result.view(2, 6) # tensor([[1,  2,  3,  4,  5,  6],
                            #         [7,  8,  9, 10, 11, 12]])
 
 # 참고: concatenating + reshape의 결과는 torch.stack을 쓰면 된다
-result_stack = torch.stack([x, y], dim=0) # tensor([[1,  2,  3,  4,  5,  6],
-                                          #         [7,  8,  9, 10, 11, 12]])
+result_stack = torch.stack([x_flattened, y_flattened], dim=0) # tensor([[1,  2,  3,  4,  5,  6],
+                                                              #         [7,  8,  9, 10, 11, 12]])
 ```
 <br/>
 ---
