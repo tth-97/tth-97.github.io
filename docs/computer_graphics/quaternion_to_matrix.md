@@ -8,11 +8,13 @@ nav_order: 2
 Quaternion to Ratation Matrix
 {: .fs-7 .fw-700 }
 
-**Quaternion**은 실수 계산 과정에서 회전 변환 행렬에 비해 안정적이고 여러 회전들의 조합을 빠르게 처리할 수 있으며 회전들 사이의 보간에 유용하다는 장점이 있지만, 2-to-1 mapping, 즉 하나의 회전을 뜻하는 값이 두개인 문제점이 있다(**q** and **-q** represent the same rotation).  
+**Quaternion**은 실수 계산 과정에서 회전 변환 행렬에 비해 안정적이고 여러 회전들의 조합을 빠르게 처리할 수 있으며 회전들 사이의 보간에 유용하다는 장점이 있지만, 2-to-1 mapping, 즉 하나의 회전을 뜻하는 값이 두개인 문제점이 있다(**q** and **-q** represent the same rotation).   
+
 반면 **Rotataion Matrix**는 1-to-1 mapping이며 continuous하고 6D Rotational Representation을 사용하면 parameter 수도 줄일 수 있으므로, 특히 deep motion synthesis research등에 많이 사용되는 추세이댜.   
 로봇의 Orientation은 주로 Quaternion으로 표현되므로(ROS 등), Quaternion값을 deep learning에 사용하기 위해 3x3 Rotation Matrix로 바꾸는 방법에 대해서 알아보자.   
     
-      
+ <br/>     
+ 
 {: .important-title}
 > Note   
 >   
@@ -24,7 +26,11 @@ Quaternion to Ratation Matrix
 > We can just taking two columns of rotation matrix. The other one can be reconstructed using **cross product**.   
 > Note that this 6D representation as a network output requires an **otrhogonalization** step (e.g. Gram-Schmidt process).
 
+<br/>
+
+
 ---
+
 
 Convert a Quaternion to a Rotation Matrix
 {: .fs-6 .fw-700 }
@@ -41,7 +47,8 @@ $$ M =  \begin{bmatrix}
 	2xz-2wy & 2yz+2wx & 1-2x^{2}-2y^{2} 
 	\end{bmatrix} $$     
        
-    
+ <br/>   
+ 
 {: .highlight-title }
 > Note   
 >   
@@ -51,6 +58,7 @@ $$ M =  \begin{bmatrix}
 > - **Rotation** from a global frame to be that rotated frame or,   
 > - **Orientation** of new rotated frame     
 
+<br/>
 
 ----
 

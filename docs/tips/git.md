@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Etc
+title: Git
 parent: Tips
 has_children: true
-nav_order: 2
+nav_order: 1
 ---

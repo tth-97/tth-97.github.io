@@ -3,6 +3,7 @@ layout: default
 title: Q-Learning with Frozen Lake Problem
 parent: Reinforcement Learning
 grand_parent: Artificial Intelligence
+nav_order=1
 permalink: /docs/artifirial_intelligence/reinforcement_learning/q_learning_frozen_lake_problem/
 ---
 Q-Learning with Frozen Lake Problem

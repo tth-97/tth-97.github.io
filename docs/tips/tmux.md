@@ -1,12 +1,9 @@
 ---
 layout: default
-<<<<<<< HEAD:docs/tips/logistic_regression.md
-title: tmux 
-=======
 title: tmux
->>>>>>> fac86c213f63861bff472cac0c7f6d37431dc71b:docs/tips/tmux.md
 parent: Etc
 grand_parent: Tips
+nav_order: 1
 permalink: /docs/tips/etc/tmux/
 ---
 
@@ -25,10 +22,11 @@ tmux의 목적은 다음과 같다.
 예를 들어 내가 작업용 컴퓨터의 xterm에서 ssh를 사용하여 원격 서버에 연결하고 여러 프로그램(editor, compiler, shell 등)으로 작업을 수행했다고 하자. 만약 tmux로 xterm을 닫고 집에 간다면, 집에서 동일한 원격 서버에 연결하고 tmux에 접속하여 이전 작업을 이어서 진행할 수 있을 것이다.
 또한 ssh 등을 사용하여 원격 접속을 하다 ssh가 중단되면, 그 세션에서 foreground로 실행중인 프로그램도 중단이 된다. 만약 tmux를 사용하여 background에서 프로그램을 실행한다면 SSH 세션이 닫혀도 작업이 중단되지 않고 실행될 수 있을 것이다.
 
+<br/>
 ---
 
 Installation
-{: .fs-6 .fw-500 }
+{: .fs-6 .fw-700 }
 
 Debian 또는 Ubuntu에서 Binary packages로 설치하는 명령어이다.
 
@@ -36,45 +34,19 @@ Debian 또는 Ubuntu에서 Binary packages로 설치하는 명령어이다.
 $ apt install tmux
 ```
 
+<br/>
+
 ---
 
 Basic concepts
-{: .fs-6 .fw-500 }
+{: .fs-6 .fw-700 }
 
 tmux는 모든 state를 하나의 메인 process인 tmux server에 보관한다. 이 서버는 background에서 실행되며, tmux 아넹서 실행 중인 모든 프로그램을 관리하고 output을 추적한다. 사용자가 tmux 명령을 실행하면 tmux server가 자동으로 시작되며, 기본적으로 실행 중인 프로그램이 없을 때 종료된다.
 
 사용자는 client를 시작하며 tmux server에 attach한다. 이 client는 실행되는 터미널을 점유하며, /tmp 디렉토리에 있는 socket file을 통해 server와 통신한다. 각 client는 하나의 터미널에서 실행된다.
 
-
-![linear_vs_logistic](../../../../assets/images/linear_vs_logistic.png){: width="90%" height="90%"}
-
-그렇다면, 어떻게 Logistic regression을 이용하여 위 그림과 같이 출력값을 잘 추정하는 모델을 만들 수 있을까?
  
 ----
 
-Cost Function
-{: .fs-6 .fw-500 }
-
-* Model: $$\hat{y} = \sigma(w^{T}x + b)$$, where $$ \sigma(z^{i}) = \frac{1}{1+e^{-z^{i}}}$$ and $$z^{i} = W^{T}x^{i} + b$$
-* Given training set $$ \{ (x^{1},y^{1}),\ ...,\ (x^{m},y^{m}) \}, we want $$ \hat{y}^{i} \approx y^{i}$$
-
-{: .important-title}
-> Note
->  
-> Entropy
-> To measure degree of impurity, Entropy = $$ \sum_{j} -p_{j} \log_{2} p_{j} $$ where $$ p_{h} $$ values of probability of class $$j$$.
-> 
-> 즉 Entropy는 $$p$$의 확률로 일로 일어날 이벤트를 확인했을 때, 얻게되는 정보의 양(또는 놀람의 정도, $$-\log_{2} p_{j} $$의 기댓값을 뜻한다.
-
-위 Entropy이론에 근거하여 Logistic regression의 Loss(error) funtion은 다음과 같이 [cross-entropy loss](https://en.wikipedia.org/wiki/Cross_entropy)로 정의할 수 있다.
-
-* cross-entropy loss: $$L(\hat{y},y) = -y\log \hat{y} -(1-y)\log (1- \hat{y})$$
-  * If $$ y \rightarrow 1 : L(\hat{y},y) = -y\log \hat{y} \ \rightarrow want \log \hat{y} large \ \rightarrow want \hat{y} large \ \rightarrow want \hat{y} \approx 1 $$
-  * If $$ y \rightarrow 0 : L(\hat{y},y) = -\log (1-\hat{y}) \ \rightarrow want \log (1-\hat{y}) large \ \rightarrow want \hat{y} small \ \rightarrow want \hat{y} \approx 0 $$
-  
-training set이 여러개라면, Loss funtion은 다음과 같이 Cost funtion(모든 training data의 Loss값의 평균)으로 나타낼 수 있다.
-  
-* cost funtion: $$J(w, b) = \frac{1}{m} \sum_{i=1}^m L(\hat{y}^i,y^i) = \frac{1}{m} \sum_{i=1}^m y^i \log \hat{y}^i -(1-y^i)\log (1- \hat{y}^i) $$
-
-이제 추상적이였던 Logistic regression의 goal(try to learn the parameters $$w$$ and $$b$$ so that $$\hat{y}$$ becomes a good estimate of the probability of $$y$$)이 cost funtion $$J(w, b)$$을 최소하하는 $$w$$와 $$b$$값을 찾는 문제로 단순해졌다. 
+Cost
 

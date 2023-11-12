@@ -16,6 +16,7 @@ torch.cat(tensors, dim=0, *, out=None) -> Tensor
 
 **Parameters**  
 > **tensors**(_sequence of Tensors_) - any python sequence of tensors of the same type. Non-empty tensors provided must have the same shape, except in the cat dimension.    
+> 
 > **dim**(_int, optional_): the dimension over which the tensors are concatenated   
 
 **Keyword Arguments**
