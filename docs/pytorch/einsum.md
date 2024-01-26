@@ -127,4 +127,3 @@ diagonal = torch.einsum('ii', a) # tensor(34)
 
 참고  
 PyTorch 문서: [https://pytorch.org/docs/stable/generated/torch.einsum.html](https://pytorch.org/docs/stable/generated/torch.einsum.html)   
-Wikipedia, Einstein notation: [https://en.wikipedia.org/wiki/Einstein_notation](https://en.wikipedia.org/wiki/Einstein_notation)

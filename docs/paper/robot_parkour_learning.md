@@ -1,40 +1,76 @@
 ---
 layout: default
-title: TORCH.CAT
-last_modified_date: 2023-10-20 12:27:24
-parent: PyTorch
+title: Robot Parkour Learning
+last_modified_date: 2023-11-15 15:12:24
+parent: Papers
 nav_order: 2
-permalink: /docs/pytorch/cat
+permalink: /docs/papers/robot_parkour_learning
 ---
 
-TORCH.CAT
+Robot ParKour Learning
 {: .fs-7 .fw-700 }
 
-```python
-torch.cat(tensors, dim=0, *, out=None) -> Tensor
-```
+[Robot Pakour Learning](https://robot-parkour.github.io/resources/Robot_Parkour_Learning.pdf) (CoRL 2023)
 
-**Parameters**  
-> **tensors**(_sequence of Tensors_) - any python sequence of tensors of the same type. Non-empty tensors provided must have the same shape, except in the cat dimension.    
-> 
-> **dim**(_int, optional_): the dimension over which the tensors are concatenated   
-
-**Keyword Arguments**
-> **out**(_Tensor, optional_) - the output tensor   
-
-<br/>
-**torch.cat**은 텐서들을 특정 차원을 기준으로 이어붙이는(concatenating) 작업을 수행하는 함수이다. 데이터를 처리하거나 딥러닝 모델의 구조를 설계할 때, 두 개 이상의 텐서를 하나로 합치는 경우가 자주 있다. 이러한 경우에 torch.cat을 사용한다.
 <br/>
 
 ---
  
-
-Examples
+Robot Parkour Learning Systems
 {: .fs-6 .fw-700 }
 
-합치고자 하는 텐서는 리스트[ ]나 튜플( )로 나타내야 하며, 어느 차원을 기준으로 텐서들을 합칠 것인지 알려줘야 한다.   
+1. Parkour Skills Learning via Two-Stage RL
+{: .fs-5 .fw-700 }
+
+Robot vision 사용해야하는 모션을 학습할 때, 보통 depth/rgb iamge data를 direct하게 RL로 학습시킨다. 그러나 이 방법은 불안정하고, render하는데 costly하다는 단점이 있다. 따라서 이 논문에서는 **previleged visual information**을 사용한다.
+
+* **Previleged visual information:** 
+   - the distance from the robot's current position to the obstacle in front of the robot
+   - the height of the obstacle
+   - the width of the obstacle
+   - a 4-dimensional one-hot category representing the four types of obstacles
+  
+  
+RL 요소 정의
+
+
+* **Inputs of policy(states):**
+  * $$ S_{t}^{propprio} \in \mathbb{R}^{29} $$ (row, pitch, base angular velocities, joints positions, joints velocities)
+  * last action $$a_{t-1} \in \mathbb{R}^{12} $$
+  * the privileged visual information $$e_{t}^{vis}$$
+  * privileged physics information $$e_{t}^{phy}$$
+
 <br/>
-* dim=0
+
+* **Outputs of policy:**
+  * target joint positions $$a_{t} \in \mathbb{R}^{12}$$
+
+<br/>
+
+* **Environment:**
+
+각각의 specialized skill plicies  $$\pi_{climb}, \pi_{leap}, \pi_{crawl}, \pi_{tilt}, \pi_{run}$$ 는 아래와 같은 terrains에서 학습하였다.
+
+![sigmoid_function](../../../../assets/images/papers/dynamics_constraint.png){: width="100%" height="100%"}
+
+<br/>
+
+* **reward:**
+
+모든 specialized skill poicies  $$\pi_{climb}, \pi_{leap}, \pi_{crawl}, \pi_{tilt}, \pi_{run}$$ 는 같은 reward 구조를 사용하여 학습하였다. (reward engineering이 없는 것이 메리트인 듯) reward는 mechanical energy를 최소화하면서 general한 skill을 자연스러운 모션으로 생성해 낼 수 있도록 구성되었고, 그 식은 아래와 같다.  
+  
+$$ r_{skill} = r_{forward} + r_{energy} + r_{alive},$$    
+   
+where  
+    
+$$ r_{forward} = -\alpha_{1} * |v_{x} - v_{x}^{target}| - \alpha_{2} * {|v_{y}|}^2 + \alpha_{3} * e^{-|w_{yaw}|},$$   
+$$ r_{energy} = -\alpha_{4} * \sum_{j \in joints} {|\tau_{j}\dot{q}_{j}|}^2, $$   
+$$ r_{alive} = r $$  
+
+위 리워드는 매 step마다 계산되며, $$v_{x}$$는 forward base linear velocity, $$v_{x}^{target}$$은 target speed(대략 1 m/s), $$v_{y}$$는 lateral base linear velocity, $$\omega_{yaw}$$는 base angular yaw velocity, $$\tau_{j}$$는 torque at joint $$j$$, $$\dot{q}_{j}$$는 joint velocity at at joint j 그리고 $$\alpha$$는 are hyperparameters이다.
+
+
+
 {: .fs-5 .fw-700 .text-yellow-200 }
 
 dim=0 은 첫 번째 차원을 기준으로 텐서들을 합치는 것을 의미한다. 두 개의 2x3 텐서를 첫 번째 차원을 기준으로 합치면 (2+2)x3 = 4x3 텐서가 된다.

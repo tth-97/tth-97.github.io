@@ -1,17 +1,17 @@
 ---
 layout: default
-title: TORCH.CAT
-last_modified_date: 2023-10-20 12:27:24
+title: TORCH.NORM
+last_modified_date: 2023-11-24 12:27:24
 parent: PyTorch
-nav_order: 2
-permalink: /docs/pytorch/cat
+nav_order: 3
+permalink: /docs/pytorch/norm
 ---
 
-TORCH.CAT
+TORCH.NORM
 {: .fs-7 .fw-700 }
 
 ```python
-torch.cat(tensors, dim=0, *, out=None) -> Tensor
+torch.norm(input, p='fro', dim=None, keepdim=False, out=None, dtype=None)
 ```
 
 **Parameters**  
